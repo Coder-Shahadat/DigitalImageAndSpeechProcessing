@@ -1,1 +1,0 @@
-This repo is all about Image Processing Lab of Digital Image and Speech Processing
