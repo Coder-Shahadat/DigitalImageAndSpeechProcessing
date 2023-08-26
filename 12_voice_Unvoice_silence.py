@@ -1,6 +1,7 @@
 import numpy as np
 import librosa
 import sounddevice as sd
+import matplotlib.pyplot as plt
 
 # Load a speech signal (replace 'speech.wav' with your file)
 speechSignal, Fs = librosa.load('sound.mp3', sr=None)
@@ -34,17 +35,37 @@ for i in range(0, len(speechSignal) - frame_size, int(frame_size * (1 - overlap)
         voiced[i : i + frame_size] = frame
 
 # Play the original speech signal
-sd.play(speechSignal, Fs)
-sd.wait()
-print('Orginal')
+# sd.play(speechSignal, Fs)
+# sd.wait()
+# print('Orginal')
 
-# Play the separated segments
-sd.play(voiced, Fs)
-sd.wait()
-print('Voice finished')
-sd.play(unvoiced, Fs)
-sd.wait()
-print('unvoiced finished')
-sd.play(silence, Fs)
-sd.wait()
-print('Silence finished')
+# # Play the separated segments
+# sd.play(voiced, Fs)
+# sd.wait()
+# print('Voice finished')
+# sd.play(unvoiced, Fs)
+# sd.wait()
+# print('unvoiced finished')
+# sd.play(silence, Fs)
+# sd.wait()
+# print('Silence finished')
+
+
+plt.figure(figsize=(12,10))
+plt.subplot(411)
+plt.plot(speechSignal)
+plt.title('Orginal Signal')
+
+plt.subplot(412)
+plt.plot(voiced)
+plt.title('Voiced Signal')
+
+plt.subplot(413)
+plt.plot(unvoiced)
+plt.title('Unvoiced Signal')
+
+plt.subplot(414)
+plt.plot(silence)
+plt.title('Silenced Signal')
+plt.tight_layout()
+plt.show()
